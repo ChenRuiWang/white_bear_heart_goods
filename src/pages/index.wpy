@@ -5,8 +5,9 @@
         position: fixed;
         top: 0;
         left: 0;
+
         .search {
-            background-color: #6E6E6E;
+            background-color: #f1f1f1;
             width: ~"420rpx";
             height: ~"60rpx";
             line-height: ~"60rpx";
@@ -17,12 +18,14 @@
             border-radius: ~"50rpx";
             display: inline-block;
             vertical-align: middle;
+
             text {
-                color: white;
+                color: black;
                 margin-left: ~"20rpx";
                 font-size: ~"24rpx";
             }
         }
+
         .tabs {
             width: 100%;
             margin-top: ~"120rpx";
@@ -37,20 +40,23 @@
             justify-content: space-around;
             z-index: 10;
             position: relative;
+
             .item {
                 width: 20%;
                 text-align: center;
                 color: #fff;
             }
+
             .nav-underline {
                 position: absolute;
                 bottom: 0;
                 display: block;
-                height: 3px;
-                width: 30px;
+                height: ~"6rpx";
+                width: ~"60rpx";
                 background-color: #fff;
                 transition: all .2s ease-out;
             }
+
             /*.item:before{//下划线的样式
                 content: '';
                 position: absolute;
@@ -74,35 +80,87 @@
 
     .banners {
         width: 100%;
-        height: 273px;
-        position: absolute;
-        top: 0;
+        height: ~"546rpx";
         z-index: -10;
 
         image {
-            height: 280px;
+            height: ~"560rpx";
             width: 100%;
         }
     }
 
+    .content {
+        width: 100%;
+        background: #FAFAFA;
+
+        .new-goods {
+            margin: ~"20rpx";
+            background: white;
+            padding: ~"30rpx" ~"20rpx";
+
+            .title {
+                font-size: ~"32rpx";
+                font-weight: bold;
+            }
+            .good:first-child {
+                margin-right: ~"20rpx";
+            }
+            .goods {
+                display: flex;
+                .good {
+                    margin-top: ~"30rpx";
+                    text-align: center;
+                    width: 180px;
+                    .image-container {
+                        height: ~"312rpx";
+                        width: 100%;
+                        background-color: #FAFAFA;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        border-radius: ~"10rpx";
+                        image {
+                            width: ~"214rpx";
+                            height: ~"214rpx";
+                        }
+                    }
+
+                    .good-name {
+                        font-size: ~"24rpx";
+                    }
+
+                    .good-price {
+                        font-size: ~"28rpx";
+                        color: #A13D38;
+                        .rmb {
+                            font-size: ~"18rpx";
+                        }
+                    }
+                }
+            }
+
+
+        }
+    }
 
 </style>
 <template>
     <view class="container">
         <view class="header">
             <view class="search">
-                <icon type="search" size="24rpx" color="white"></icon>
+                <icon type="search" size="24rpx" color="black"></icon>
                 <text>搜索商品</text>
             </view>
 
             <view class="tabs">
                 <block wx:for="{{tabs}}" wx:key="{{index}}">
-                    <view class="item {{index==currentTabIndex ? 'active' : ''}}" data-index="{{index}}" @tap.stop="setCurrentTab">
+                    <view class="item {{index==currentTabIndex ? 'active' : ''}}" data-index="{{index}}"
+                          @tap.stop="setCurrentTab">
                         {{item}}
                     </view>
 
                 </block>
-                <i class="nav-underline" style="left: {{left}}px"></i>
+                <i class="nav-underline" style="left: {{left * 2}}rpx"></i>
             </view>
 
         </view>
@@ -119,7 +177,24 @@
         </swiper>
 
         <view class="content">
+            <view class="new-goods">
+                <text class="title">每日上新</text>
+                <view class="goods">
+                    <block wx:for="{{dayNewGoods}}" wx:key="{{index}}">
+                        <view class="good">
+                            <view class="image-container">
+                                <image class="good-image" src="{{item.image}}"></image>
+                            </view>
+                            <text class="good-name">{{item.name}}</text>
+                            <view class="good-price">
+                                <text class="rmb">¥</text>
+                                <text>{{item.price}}</text>
+                            </view>
+                        </view>
+                    </block>
+                </view>
 
+            </view>
         </view>
     </view>
 </template>
@@ -142,7 +217,21 @@
       tabs: ['推荐', '家居', '美食', '餐厨', '数码'],
       centerPlusValue: 22.5,
       currentTabIndex: 0,
-      left: 22.5
+      left: 22.5,
+      dayNewGoods: [
+        {
+          id: 1,
+          image: '/images/goods/huangdou.png',
+          name: '有机黄豆',
+          price: 20
+        },
+        {
+          id: 2,
+          image: '/images/goods/hongdou.png',
+          name: '有机红豆',
+          price: 10
+        }
+      ]
     }
     methods = {
       setCurrentTab(e) {

@@ -1,0 +1,86 @@
+<template lang="wxml">
+    <view class="items">
+        <block wx:for="{{goods}}" wx:key="{{index}}">
+            <view class="item">
+                <view class="image-container">
+                    <image src="{{item.image}}"></image>
+                </view>
+                <view class="detail">
+                    <text class="title">{{item.name}}</text>
+
+                    <text wx:if="{{item.like}}" class="like">{{item.like}}</text>
+                     <view class="price">
+                        <text class="rmb">¥</text>
+                        <text>{{item.price}}</text>
+                     </view>
+                </view>
+            </view>
+        </block>
+    </view>
+</template>
+
+<script>
+    import wepy from 'wepy'
+
+    export default class Goods extends wepy.component {
+      props = {
+        goods: Array
+      }
+      data = {}
+    }
+</script>
+
+<style lang="less">
+    .item:nth-of-type(odd) {
+        margin-right: ~"20rpx";
+    }
+    .items .item {
+        height: ~"500rpx";
+        /*width: ~"335rpx";*/
+        border-radius: ~"10rpx";
+        width: ~"calc(50% - 70rpx)";
+        padding: 0 ~"20rpx";
+        background-color: white;
+        margin-bottom: ~"20rpx";
+        .image-container {
+            display: flex;
+            background-color: white;
+            width: 100%;
+            align-items: center;
+            justify-content: center;
+            height: ~"350rpx";
+
+            image {
+                width: ~"220rpx";
+                height: ~"190rpx";
+            }
+        }
+
+        .detail {
+            width: 100%;
+            padding: 0 ~"20rpx";
+            display: flex;
+            flex-direction: column;
+
+            .title {
+                font-size: ~"23rpx";
+            }
+
+            .like {
+                font-size: ~"23rpx";
+                color: #b79262;
+                margin-top: ~"15rpx";
+            }
+
+            .price {
+                margin-top: ~"15rpx";
+                color: #ac2c2b;
+                font-size: ~"26rpx";
+
+                .rmb {
+                    font-size: ~"18rpx";
+                }
+            }
+        }
+    }
+</style>

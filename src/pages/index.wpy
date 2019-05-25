@@ -7,7 +7,7 @@
         left: 0;
 
         .search {
-            background-color: #f1f1f1;
+            background-color: rgba(241, 241, 241, 0.6);
             width: ~"420rpx";
             height: ~"60rpx";
             line-height: ~"60rpx";
@@ -131,15 +131,21 @@
 
                     .good-price {
                         font-size: ~"28rpx";
-                        color: #A13D38;
+                        color: #ac2c2b;
                         .rmb {
                             font-size: ~"18rpx";
                         }
                     }
                 }
             }
+        }
 
-
+        .items {
+            margin: ~"20rpx";
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
         }
     }
 
@@ -193,8 +199,10 @@
                         </view>
                     </block>
                 </view>
-
             </view>
+
+            <goods :goods="goods"></goods>
+
         </view>
     </view>
 </template>
@@ -202,6 +210,7 @@
 <script>
   import wepy from 'wepy'
   import moduleA from 'module-a' // aliasFields ignore module example
+  import Goods from '../components/goods'
 
   console.log('moduleA ignored: ', moduleA) // => moduleA ignored: {}
 
@@ -209,6 +218,7 @@
     config = {
       // navigationBarTitleText: 'test'
     }
+    components = {goods: Goods}
     data = {
       imgUrls: [
         '/images/banners/sleep.png',
@@ -231,6 +241,21 @@
           name: '有机红豆',
           price: 10
         }
+      ],
+      goods: [
+        {
+          id: 1,
+          image: '/images/goods/lajidai.png',
+          name: '环保PE垃圾袋 30*3',
+          price: 10
+        },
+        {
+          id: 2,
+          image: '/images/goods/lajidai.png',
+          name: '环保PE垃圾袋 30*3',
+          like: '茶花同厂',
+          price: 10
+        }
       ]
     }
     methods = {
@@ -239,6 +264,18 @@
         this.left = e.currentTarget.offsetLeft + this.centerPlusValue
         this.currentTabIndex = index
       }
+    }
+    // 下拉刷新
+    onPullDownRefresh() {
+      console.log('onPullDownRefresh')
+      wx.showNavigationBarLoading() // 在标题栏中显示加载
+
+      // 模拟加载
+      setTimeout(function() {
+        // complete
+        wx.hideNavigationBarLoading() // 完成停止加载
+        wx.stopPullDownRefresh() // 停止下拉刷新
+      }, 1500)
     }
   }
 </script>

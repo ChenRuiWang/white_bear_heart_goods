@@ -19,6 +19,7 @@
         'pages/index'
       ],
       window: {
+        enablePullDownRefresh: true,
         navigationStyle: 'custom'
       }
     }

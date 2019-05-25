@@ -1,5 +1,7 @@
 <style lang="less">
     .container {
+        width: 100%;
+        overflow: hidden;
         height: 100%;
         display: flex;
         flex-direction: column;
@@ -21,6 +23,32 @@
       window: {
         enablePullDownRefresh: true,
         navigationStyle: 'custom'
+      },
+      tabBar: {
+        'list': [
+          {
+            'pagePath': 'pages/index',
+            'text': '首页',
+            'iconPath': '/images/icons/tabBar/home.png',
+            'selectedIconPath': '/images/icons/tabBar/home_selected.png'
+          },
+          {
+            'pagePath': 'pages/index',
+            'text': '购物车',
+            'iconPath': '/images/icons/tabBar/cart.png',
+            'selectedIconPath': '/images/icons/tabBar/cart_selected.png'
+          },
+          {
+            'pagePath': 'pages/index',
+            'text': '我的',
+            'iconPath': '/images/icons/tabBar/user.png',
+            'selectedIconPath': '/images/icons/tabBar/user_selected.png'
+          }
+        ],
+        selectedColor: '#b12f2f',
+        color: '#b9b9b9',
+        backgroundColor: '#ffffff',
+        borderStyle: 'black'
       }
     }
 

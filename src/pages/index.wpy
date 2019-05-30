@@ -1,5 +1,7 @@
 <style lang="less">
-
+    .scroll {
+        background: white;
+    }
     .header {
         width: 100%;
         position: fixed;
@@ -152,7 +154,7 @@
 </style>
 <template>
     <view class="container">
-        <view class="header">
+        <view class="{{headerClass}}">
             <view class="search">
                 <icon type="search" size="24rpx" color="black"></icon>
                 <text>搜索商品</text>
@@ -228,6 +230,8 @@
       centerPlusValue: 22.5,
       currentTabIndex: 0,
       left: 22.5,
+      scrollTop: 0,
+      headerChangeScroll: 205, // 滑动到多少改变header样式
       dayNewGoods: [
         {
           id: 1,
@@ -265,10 +269,14 @@
         this.currentTabIndex = index
       }
     }
+    computed = {
+      headerClass() {
+        return this.scrollTop === this.headerChangeScroll ? 'header scroll' : 'header'
+      }
+    }
     // 下拉刷新
     onPullDownRefresh() {
-      console.log('onPullDownRefresh')
-      wx.showNavigationBarLoading() // 在标题栏中显示加载
+      // wx.showNavigationBarLoading() // 在标题栏中显示加载
 
       // 模拟加载
       setTimeout(function() {
@@ -276,6 +284,9 @@
         wx.hideNavigationBarLoading() // 完成停止加载
         wx.stopPullDownRefresh() // 停止下拉刷新
       }, 1500)
+    }
+    onPageScroll(e) {
+      this.scrollTop = e.scrollTop * 2
     }
   }
 </script>

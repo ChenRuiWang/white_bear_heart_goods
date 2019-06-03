@@ -1,0 +1,39 @@
+<template lang="wxml">
+    <view class="end">
+        The End
+    </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  export default class End extends wepy.component {
+    data = {}
+  }
+</script>
+
+<style lang="less">
+    .end {
+        color: #9a9ea3;
+        text-align: center;
+        font-size: ~"20rpx";
+        padding-top: ~"80rpx";
+        padding-bottom: ~"200rpx";
+    }
+
+    .end:before,.end:after{
+        content: "";
+        width: ~"30rpx";
+        /*height: ~"4rpx";*/
+        border-top: ~"4rpx" #9a9ea3 solid;
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .end:before {
+        margin-right: ~"20rpx";
+    }
+
+    .end:after {
+        margin-left: ~"20rpx";
+    }
+</style>

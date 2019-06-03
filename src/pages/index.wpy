@@ -1,6 +1,24 @@
 <style lang="less">
     .scroll {
+        padding-bottom: ~"10rpx";
         background: white;
+        .search {
+            text {
+                color: black !important;
+            }
+        }
+        .tabs {
+            color: black !important;
+            .item {
+                color: black !important;
+            }
+            .active {
+                color: #9e3731 !important;
+            }
+            .nav-underline {
+                background-color: #9e3731 !important;
+            }
+        }
     }
     .header {
         width: 100%;
@@ -22,7 +40,7 @@
             vertical-align: middle;
 
             text {
-                color: black;
+                color: white;
                 margin-left: ~"20rpx";
                 font-size: ~"24rpx";
             }
@@ -46,7 +64,7 @@
             .item {
                 width: 20%;
                 text-align: center;
-                color: #fff;
+                color: white;
             }
 
             .nav-underline {
@@ -203,8 +221,9 @@
                 </view>
             </view>
 
-            <goods :goods="goods"></goods>
-
+            <goods :goods.sync="goods"></goods>
+            <myloading wx:if="{{!isEnd}}"></myloading>
+            <end wx:if="{{isEnd}}"></end>
         </view>
     </view>
 </template>
@@ -213,6 +232,8 @@
   import wepy from 'wepy'
   import moduleA from 'module-a' // aliasFields ignore module example
   import Goods from '../components/goods'
+  import End from '../components/common/end'
+  import Loading from '../components/common/loading'
 
   console.log('moduleA ignored: ', moduleA) // => moduleA ignored: {}
 
@@ -220,7 +241,7 @@
     config = {
       // navigationBarTitleText: 'test'
     }
-    components = {goods: Goods}
+    components = {goods: Goods, end: End, myloading: Loading}
     data = {
       imgUrls: [
         '/images/banners/sleep.png',
@@ -229,8 +250,9 @@
       tabs: ['推荐', '家居', '美食', '餐厨', '数码'],
       centerPlusValue: 22.5,
       currentTabIndex: 0,
-      left: 22.5,
+      left: 22.5, // 下划线左边位置
       scrollTop: 0,
+      isEnd: false,
       headerChangeScroll: 205, // 滑动到多少改变header样式
       dayNewGoods: [
         {
@@ -260,6 +282,21 @@
           like: '茶花同厂',
           price: 10
         }
+      ],
+      moreGoods: [
+        {
+          id: 3,
+          image: '/images/goods/lajidai.png',
+          name: '环保PE垃圾袋 30*3',
+          price: 10
+        },
+        {
+          id: 4,
+          image: '/images/goods/lajidai.png',
+          name: '环保PE垃圾袋 30*3',
+          like: '茶花同厂',
+          price: 10
+        }
       ]
     }
     methods = {
@@ -271,7 +308,7 @@
     }
     computed = {
       headerClass() {
-        return this.scrollTop === this.headerChangeScroll ? 'header scroll' : 'header'
+        return this.scrollTop >= this.headerChangeScroll ? 'scroll header' : 'header'
       }
     }
     // 下拉刷新
@@ -287,6 +324,19 @@
     }
     onPageScroll(e) {
       this.scrollTop = e.scrollTop * 2
+      this.$apply()
+    }
+    onReachBottom() {
+      const self = this
+      this.moreGoods.forEach((good) => {
+        this.goods.push(good)
+      })
+      // 模拟加载
+      setTimeout(function () {
+        console.log('Dema it')
+        self.isEnd = true
+        self.$apply()
+      }, 2000)
     }
   }
 </script>

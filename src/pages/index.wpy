@@ -25,7 +25,7 @@
         position: fixed;
         top: 0;
         left: 0;
-
+        z-index: 10;
         .search {
             background-color: rgba(241, 241, 241, 0.6);
             width: ~"420rpx";
@@ -101,7 +101,7 @@
     .banners {
         width: 100%;
         height: ~"546rpx";
-        z-index: -10;
+        z-index: 0;
 
         image {
             height: ~"560rpx";

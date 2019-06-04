@@ -9,6 +9,7 @@
         justify-content: space-between;
         box-sizing: border-box;
         background-color: #fbfafa;
+        z-index: -1;
     }
 </style>
 
@@ -19,8 +20,8 @@
   export default class extends wepy.app {
     config = {
       pages: [
-        'pages/good/good',
-        'pages/index'
+        'pages/index',
+        'pages/good/good'
       ],
       window: {
         enablePullDownRefresh: true,

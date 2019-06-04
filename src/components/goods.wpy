@@ -1,7 +1,7 @@
 <template lang="wxml">
     <view class="items">
         <block wx:for="{{goods}}" wx:key="{{index}}">
-            <view class="item">
+            <view class="item" @tap="toDetail">
                 <view class="image-container">
                     <image src="{{item.image}}"></image>
                 </view>
@@ -27,6 +27,12 @@
         goods: Array
       }
       data = {}
+      methods = {
+        toDetail() {
+          console.log('Hello')
+          this.$parent.$navigate({url: 'good/good'})
+        }
+      }
     }
 </script>
 

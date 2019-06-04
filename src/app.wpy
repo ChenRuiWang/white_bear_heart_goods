@@ -8,6 +8,7 @@
         align-items: center;
         justify-content: space-between;
         box-sizing: border-box;
+        background-color: #fbfafa;
     }
 </style>
 
@@ -18,10 +19,13 @@
   export default class extends wepy.app {
     config = {
       pages: [
+        'pages/good/good',
         'pages/index'
       ],
       window: {
         enablePullDownRefresh: true,
+        navigationBarBackgroundColor: '#ffffff',
+        navigationBarTextStyle: 'black',
         navigationStyle: 'custom'
       },
       tabBar: {

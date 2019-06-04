@@ -1,13 +1,492 @@
-<template lang="wxml">
+<template>
     <view class="container">
+        <view class="banners-container">
+            <swiper class="banners"
+                    bindchange="swiperChange"
+                    autoplay="{{true}}"
+                    interval="5000"
+                    circular="{{true}}"
+            >
+                <block wx:for="{{images}}" wx:key="{{index}}">
+                    <swiper-item>
+                        <image src="{{item}}" class="slide-image"/>
+                    </swiper-item>
+                </block>
 
+            </swiper>
+            <view class="total">
+                <text class="big">{{currentImage + 1}}</text>
+                <text>/{{images.length}}</text>
+            </view>
+        </view>
+
+        <view class="detail">
+            <view class="number">
+                <view class="price">
+                    <text class="rmb">¥</text>
+                    <text>20</text>
+                </view>
+                <view class="sales">
+                    已售3.23万件
+                </view>
+            </view>
+            <view class="title">迷你小煎锅 16cm</view>
+            <view class="tags">
+                <view class="tag">苏泊尔同厂</view>
+                <view class="tag">优质铝合金</view>
+                <view class="tag">电磁炉禁用</view>
+                <view class="tag">导热均匀</view>
+                <view class="tag">不沾涂层</view>
+                <view class="tag">坚实耐用</view>
+            </view>
+        </view>
+
+        <view class="money">
+            <view class="content">
+                <view class="title">为您节省
+                    <text class="save">29元</text>
+                </view>
+            </view>
+            <view class="cost-detail">
+                <view class="item">
+                    <image src="/images/icons/raw.png"></image>
+                    <view>原料</view>
+                    <view class="money">
+                        <text class="rmb">¥</text>
+                        16.07
+                    </view>
+                </view>
+                <view class="plus">+</view>
+                <view class="item">
+                    <image src="/images/icons/pack.png"></image>
+                    <view>包装</view>
+                    <view class="money">
+                        <text class="rmb">¥</text>
+                        0.5
+                    </view>
+                </view>
+                <view class="plus">+</view>
+                <view class="item">
+                    <image src="/images/icons/artificial.png"></image>
+                    <view>人工</view>
+                    <view class="money">
+                        <text class="rmb">¥</text>
+                        0.3
+                    </view>
+                </view>
+                <view class="plus">+</view>
+                <view class="item">
+                    <image src="/images/icons/taxation.png"></image>
+                    <view>税费</view>
+                    <view class="money">
+                        <text class="rmb">¥</text>
+                        1
+                    </view>
+                </view>
+                <view class="plus">+</view>
+                <view class="item">
+                    <image src="/images/icons/storage.png"></image>
+                    <view>仓储</view>
+                    <view class="money">
+                        <text class="rmb">¥</text>
+                        1
+                    </view>
+                </view>
+            </view>
+            <view class="line"></view>
+            <view class="labels">
+                <view class="item">
+                    <view class="label red">
+                        <view class="round"></view>
+                        <view class="price">
+                            <text class="rmb">¥</text>
+                            20
+                        </view>
+                    </view>
+                    <text class="red-font">白熊心品</text>
+                </view>
+                <view class="item">
+                    <view class="label gray">
+                        <view class="round"></view>
+                        <view class="price">
+                            <text class="rmb">¥</text>
+                            20
+                        </view>
+                    </view>
+                    <text>成本</text>
+                </view>
+                <view class="item">
+                    <view class="label orange">
+                        <view class="round"></view>
+                        <view class="price">
+                            <text class="rmb">¥</text>
+                            20
+                        </view>
+                    </view>
+                    <text>市场价</text>
+                </view>
+            </view>
+        </view>
+
+        <view class="insurance">
+            <view class="items">
+                <view class="item">
+                    <image src="/images/icons/selected.png"></image>
+                    <text>自盈品牌</text>
+                </view>
+                <view class="item">
+                    <image src="/images/icons/selected.png"></image>
+                    <text>自盈品牌</text>
+                </view>
+                <view class="item">
+                    <image src="/images/icons/selected.png"></image>
+                    <text>自盈品牌</text>
+                </view>
+                <view class="item">
+                    <image src="/images/icons/selected.png"></image>
+                    <text>自盈品牌</text>
+                </view>
+            </view>
+            <view class="banner">
+                <image src="/images/insurance/insurance.jpg"></image>
+            </view>
+        </view>
+        <end></end>
+
+        <view class="bar">
+            <view class="icons">
+                <image src="/images/icons/home.png"></image>
+                <image src="/images/icons/customer.png"></image>
+                <image src="/images/icons/cart.png"></image>
+            </view>
+            <view class="btn">
+                <button>加入购物车</button>
+            </view>
+        </view>
     </view>
+
 </template>
 
 <script>
+  import wepy from 'wepy'
+  import moduleA from 'module-a' // aliasFields ignore module example
+  import End from '../../components/common/end'
+  console.log('moduleA ignored: ', moduleA) // => moduleA ignored: {}
+  export default class Good extends wepy.page {
+    config = {
+      'navigationStyle': 'default',
+      'navigationBarTitleText': '商品详情',
+      'enablePullDownRefresh': false
+    }
+    data = {
+      images: [
+        '/images/detail/yifu.jpg',
+        '/images/detail/yifu2.jpg',
+        '/images/detail/yifu3.jpg',
+        '/images/detail/yifu4.jpg'
+      ],
+      currentImage: 0
+    }
 
+    components = {end: End}
+
+    methods = {
+      swiperChange(e) {
+        this.currentImage = e.detail.current
+      }
+    }
+  }
 </script>
 
 <style lang="less">
+    .banners-container {
+        width: 100%;
+        position: relative;
 
+        .banners {
+            width: 100%;
+            height: ~"750rpx";
+
+            image {
+                height: 100%;
+                width: 100%;
+            }
+        }
+
+        .total {
+            z-index: 10;
+            position: absolute;
+            width: ~"80rpx";
+            height: ~"50rpx";
+            line-height: ~"50rpx";
+            border-radius: ~"20rpx";
+            background-color: rgba(179, 179, 179, 0.5);
+            color: white;
+            text-align: center;
+            font-size: ~"20rpx";
+            margin-right: ~"50rpx";
+            margin-bottom: ~"20rpx";
+            right: 0;
+            bottom: 0;
+
+            .big {
+                font-size: ~"28rpx";
+            }
+        }
+    }
+    .bar {
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+        height: ~"100rpx";
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        background-color: white;
+        .icons {
+            width: ~"430rpx";
+            height: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+            border-top: ~"1rpx" solid #f1f1f1;
+            border-left: ~"1rpx" solid #f1f1f1;
+            image {
+                width: ~"40rpx";
+                height: ~"40rpx";
+            }
+
+
+        }
+        .btn {
+            width: calc(100% - ~"430rpx");
+            height: 100%;
+            button {
+                font-size: ~"28rpx";
+                height: 100%;
+                line-height: ~"100rpx";
+                background-color: #ac2c2b;
+                color: white;
+                border-radius: 0;
+                border-top-left-radius: ~"5rpx";
+                border-bottom-left-radius: ~"5rpx";
+            }
+        }
+    }
+    .detail {
+        width: 100%;
+        background-color: white;
+        padding: ~"20rpx" ~"30rpx";
+        border-bottom: ~"1rpx" solid #f1f1f1;
+        margin-bottom: ~"20rpx";
+
+        .number {
+            padding: 0 ~"30rpx";
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+
+            .price {
+                font-size: ~"40rpx";
+                color: #ac2c2b;
+                font-weight: bold;
+
+                .rmb {
+                    margin-right: ~"10rpx";
+                    font-size: ~"22rpx";
+                }
+            }
+
+            .sales {
+                font-size: ~"22rpx";
+            }
+        }
+
+        .title {
+            padding-left: ~"30rpx";
+            font-size: ~"30rpx";
+            margin-top: ~"30rpx";
+        }
+
+        .tags {
+            padding: 0 ~"30rpx";
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            margin-top: ~"30rpx";
+
+            .tag {
+                color: #7b7299;
+                background-color: #f3f0f5;
+                font-size: ~"24rpx";
+                padding: ~"13rpx";
+                margin-right: ~"30rpx";
+                margin-bottom: ~"15rpx";
+                border-radius: ~"6rpx";
+            }
+        }
+    }
+    .insurance {
+        width: 100%;
+        background-color: white;
+        margin-bottom: ~"20rpx";
+        .items {
+            padding: ~"30rpx" ~"50rpx";
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            font-size: ~"22rpx";
+            .item {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+            }
+            image {
+                width: ~"30rpx";
+                height: ~"30rpx";
+                margin-right: ~"10rpx";
+            }
+        }
+        .banner {
+            margin: 0 ~"20rpx" ~"10rpx";
+            height: ~"330rpx";
+            border: ~"5rpx" solid #cfba9d;
+            border-radius: ~"5rpx";
+            image {
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+    .money {
+        width: 100%;
+        background-color: white;
+        margin-bottom: ~"20rpx";
+        padding-bottom: ~"30rpx";
+
+        .content {
+            padding: ~"30rpx";
+
+            .title {
+                font-size: ~"30rpx";
+                font-weight: bold;
+
+                .save {
+                    margin-left: ~"20rpx";
+                    color: #ac2c2b;
+                }
+            }
+        }
+
+        .line {
+            width: ~"1rpx";
+            height: ~"30rpx";
+            margin: 0 auto;
+            background-color: #e8e8e8;
+        }
+
+        .labels {
+            margin: 0 ~"30rpx";
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+            text-align: center;
+
+            .item {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+
+                .red-font {
+                    color: #b13937;
+                }
+
+                text {
+                    margin-top: ~"15rpx";
+                    font-size: ~"26rpx";
+                }
+
+                .label {
+                    width: ~"80rpx";
+                    height: ~"90rpx";
+                    /*line-height: ~"90rpx";*/
+                    margin: 0 auto;
+                    border-radius: 100% 100% 5% 5%;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: ~"20rpx";
+                    color: white;
+
+                    .rmb {
+                        font-size: ~"16rpx";
+                    }
+
+                    .round {
+                        width: ~"20rpx";
+                        height: ~"20rpx";
+                        border-radius: 50%;
+                        margin-bottom: ~"20rpx";
+                        background-color: white;
+                    }
+                }
+
+                .red {
+                    background-color: #b13937;
+                }
+
+                .orange {
+                    background-color: #ecd5b6;
+                }
+
+                .gray {
+                    background-color: #e4e4e4;
+                }
+            }
+
+
+        }
+
+        .cost-detail {
+            margin: 0 ~"30rpx";
+            background-color: #fbfbfb;
+            height: ~"150rpx";
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+            text-align: center;
+            padding-top: ~"30rpx";
+            padding-bottom: ~"20rpx";
+
+            .plus {
+                font-size: ~"20rpx";
+            }
+
+            .item {
+                image {
+                    width: ~"45rpx";
+                    height: ~"45rpx";
+                }
+
+                view {
+                    font-size: ~"22rpx";
+                }
+
+                .money {
+                    font-size: ~"20rpx";
+
+                    .rmb {
+                        font-size: ~"18rpx";
+                    }
+                }
+            }
+        }
+    }
 </style>
